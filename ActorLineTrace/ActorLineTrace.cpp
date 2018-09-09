@@ -39,16 +39,17 @@ void AActorLineTrace::Tick(float DeltaTime)
 	FHitResult OutHit;
 	FVector Start = GetActorLocation();
 
-	Start.Z += 50.f;
-	Start.X += 200.f;
+	// Start.Z += 50.f;
+	// Start.X += 200.f;
 
 	FVector ForwardVector = GetActorForwardVector();
 	FVector End = ((ForwardVector * 500.f) + Start);
 	FCollisionQueryParams CollisionParams;
 	CollisionParams.bTraceComplex = true;
 	CollisionParams.AddIgnoredComponent(Cube);
-	// or use the below to ignore the component
+	// or you could use either of the below to ignore the root cube
 	// CollisionParams.AddIgnoredComponent_LikelyDuplicatedRoot(Cube);
+	// CollisionParams.AddIgnoredActor(this);
 
 	DrawDebugLine(GetWorld(), Start, End, FColor::Green, false, 1, 0, 5);
 
