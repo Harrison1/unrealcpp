@@ -13,12 +13,16 @@ AMyInterfaceActor::AMyInterfaceActor()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	Name = FString(TEXT("Harry"));
+
 }
 
 // Called when the game starts or when spawned
 void AMyInterfaceActor::BeginPlay()
 {
 	Super::BeginPlay();
+
+	SaySomething();
 	
 }
 
@@ -29,3 +33,8 @@ void AMyInterfaceActor::Tick(float DeltaTime)
 
 }
 
+void AMyInterfaceActor::SaySomething() 
+{
+	IMyInterface::SaySomething();
+	UE_LOG(LogTemp, Warning, TEXT("Hello Galaxy"));
+}

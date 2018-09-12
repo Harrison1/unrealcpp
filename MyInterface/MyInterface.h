@@ -26,6 +26,11 @@ class UNREALCPP_API IMyInterface
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	
-	
+	/** React to a trigger volume activating this object. Return true if the reaction succeeds. */
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category="Trigger Reaction")
+    bool ReactToTrigger() const;
+
+	virtual void SaySomething();
+
+	FString Name;
 };

@@ -7,11 +7,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "MyInterface.h"
 #include "GameFramework/Actor.h"
 #include "MyInterfaceActor.generated.h"
 
 UCLASS()
-class UNREALCPP_API AMyInterfaceActor : public AActor
+class UNREALCPP_API AMyInterfaceActor : public AActor, public IMyInterface
 {
 	GENERATED_BODY()
 	
@@ -26,7 +27,5 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	
-	
+	virtual void SaySomething() override;
 };
