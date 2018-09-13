@@ -39,4 +39,3 @@ void AMyInterfaceTriggerVolume::OnOverlapEnd(class AActor* OverlappedActor, clas
 
     }
 }
-
