@@ -17,9 +17,7 @@ class UMyInterface : public UInterface
 	GENERATED_BODY()
 };
 
-/**
- * 
- */
+
 class UNREALCPP_API IMyInterface
 {
 	GENERATED_BODY()
