@@ -25,7 +25,7 @@ void AMyInterfaceActor::SaySomething()
 	{
 		FOnTimelineFloat TimelineCallback;
 		TimelineCallback.BindUFunction(this, FName("MoveToLocation"));
-		MyTimeline->AddInterpFloat(MyCurve, TimelineCallback, FName("Alpha"));
+		MyTimeline->AddInterpFloat(MyCurve, TimelineCallback);
 		MyTimeline->SetLooping(false);
 		Start = GetActorLocation();
 		MyTimeline->PlayFromStart();
