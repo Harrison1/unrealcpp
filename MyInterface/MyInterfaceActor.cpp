@@ -5,36 +5,36 @@
 // https://harrisonmcguire.com
 
 #include "MyInterfaceActor.h"
-
+#include "Components/TimelineComponent.h"
 
 // Sets default values
 AMyInterfaceActor::AMyInterfaceActor()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	MyTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("My Timeline"));
 
 	Name = FString(TEXT("Harry"));
-
-}
-
-// Called when the game starts or when spawned
-void AMyInterfaceActor::BeginPlay()
-{
-	Super::BeginPlay();
-
-	SaySomething();
-	
-}
-
-// Called every frame
-void AMyInterfaceActor::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
 }
 
 void AMyInterfaceActor::SaySomething() 
 {
 	IMyInterface::SaySomething();
-	UE_LOG(LogTemp, Warning, TEXT("Hello Galaxy"));
+	
+	FVector PlayerLocation = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
+
+	if (MyCurve) 
+	{
+		FOnTimelineFloat TimelineCallback;
+		TimelineCallback.BindUFunction(this, FName("MoveToLocation"));
+		MyTimeline->AddInterpFloat(MyCurve, TimelineCallback, FName("Alpha"));
+		MyTimeline->SetLooping(false);
+		Start = GetActorLocation();
+		MyTimeline->PlayFromStart();
+	}
+}
+
+void AMyInterfaceActor::MoveToLocation(float value) 
+{
+	UE_LOG(LogTemp, Error, TEXT("Hello Galaxy: %f"), value);	
+	End = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
+	SetActorLocation(FMath::Lerp(Start, End, value));
 }

@@ -7,6 +7,7 @@
 #include "MyInterfaceTriggerVolume.h"
 #include "Kismet/GameplayStatics.h"
 #include "MyInterface.h"
+#include "MyInterfaceActor.h"
 
 AMyInterfaceTriggerVolume::AMyInterfaceTriggerVolume()
 {
@@ -26,7 +27,9 @@ void AMyInterfaceTriggerVolume::OnOverlapBegin(class AActor* OverlappedActor, cl
         {
             for (auto& Act : MyInterfaceActors)
             {
-	            UE_LOG(LogTemp, Warning, TEXT("I just started running, %s"), *Act->GetName());
+	            UE_LOG(LogTemp, Warning, TEXT("Actor Name: %s"), *Act->GetName());
+                AMyInterfaceActor* Meme = Cast<AMyInterfaceActor>(Act);
+                Meme->SaySomething();
             }
         }
     }

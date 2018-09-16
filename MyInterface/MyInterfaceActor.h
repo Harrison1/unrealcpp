@@ -11,6 +11,8 @@
 #include "GameFramework/Actor.h"
 #include "MyInterfaceActor.generated.h"
 
+class UTimelineComponent;
+
 UCLASS()
 class UNREALCPP_API AMyInterfaceActor : public AActor, public IMyInterface
 {
@@ -20,12 +22,20 @@ public:
 	// Sets default values for this actor's properties
 	AMyInterfaceActor();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 	virtual void SaySomething() override;
+
+	UPROPERTY(EditAnywhere)
+	UCurveFloat* MyCurve;
+
+	UPROPERTY(EditAnywhere)
+	UTimelineComponent* MyTimeline;
+
+	UPROPERTY()
+	FVector Start;
+
+	UPROPERTY()
+	FVector End;
+
+	UFUNCTION()
+	void MoveToLocation(float value);
 };
