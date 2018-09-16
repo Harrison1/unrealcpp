@@ -34,7 +34,6 @@ void AMyInterfaceActor::SaySomething()
 
 void AMyInterfaceActor::MoveToLocation(float value) 
 {
-	UE_LOG(LogTemp, Error, TEXT("Hello Galaxy: %f"), value);	
 	End = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
 	SetActorLocation(FMath::Lerp(Start, End, value));
 }
