@@ -7,7 +7,6 @@
 #include "MyInterfaceTriggerVolume.h"
 #include "Kismet/GameplayStatics.h"
 #include "MyInterface.h"
-#include "MyInterfaceActor.h"
 
 AMyInterfaceTriggerVolume::AMyInterfaceTriggerVolume()
 {
@@ -18,7 +17,7 @@ AMyInterfaceTriggerVolume::AMyInterfaceTriggerVolume()
 void AMyInterfaceTriggerVolume::OnOverlapBegin(class AActor* OverlappedActor, class AActor* OtherActor)
 {
     // check if Actors do not equal nullptr and that 
-    if (OtherActor && OtherActor != this) 
+    if (OtherActor && OtherActor != this && !Cast<AMyInterfaceActor>(OtherActor)) 
     {
         TArray<AActor*> MyInterfaceActors;
         UGameplayStatics::GetAllActorsWithInterface(GetWorld(), UMyInterface::StaticClass(), MyInterfaceActors);
@@ -27,9 +26,12 @@ void AMyInterfaceTriggerVolume::OnOverlapBegin(class AActor* OverlappedActor, cl
         {
             for (auto& Act : MyInterfaceActors)
             {
-	            UE_LOG(LogTemp, Warning, TEXT("Actor Name: %s"), *Act->GetName());
-                AMyInterfaceActor* Meme = Cast<AMyInterfaceActor>(Act);
-                Meme->SaySomething();
+                IMyInterface* InterfaceActor = Cast<IMyInterface>(Act);
+                if(InterfaceActor)
+                {
+                    InterfaceActor->SaySomething();
+                    InterfaceActor->ReactToTriggerBegin();
+                }
             }
         }
     }
@@ -37,8 +39,21 @@ void AMyInterfaceTriggerVolume::OnOverlapBegin(class AActor* OverlappedActor, cl
 
 void AMyInterfaceTriggerVolume::OnOverlapEnd(class AActor* OverlappedActor, class AActor* OtherActor)
 {
-    if (OtherActor && OtherActor != this) 
+    if (OtherActor && OtherActor != this && !Cast<AMyInterfaceActor>(OtherActor)) 
     {
+        TArray<AActor*> MyInterfaceActors;
+        UGameplayStatics::GetAllActorsWithInterface(GetWorld(), UMyInterface::StaticClass(), MyInterfaceActors);
 
+        if(MyInterfaceActors.Num() > 0)
+        {
+            for (auto& Act : MyInterfaceActors)
+            {
+                IMyInterface* InterfaceActor = Cast<IMyInterface>(Act);
+                if(InterfaceActor)
+                {
+                    InterfaceActor->ReactToTriggerEnd();
+                }
+            }
+        }
     }
 }

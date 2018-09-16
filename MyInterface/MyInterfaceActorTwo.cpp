@@ -4,23 +4,23 @@
 // https://severallevels.io
 // https://harrisonmcguire.com
 
-#include "MyInterfaceActor.h"
+#include "MyInterfaceActorTwo.h"
 #include "Components/TimelineComponent.h"
 
 // Sets default values
-AMyInterfaceActor::AMyInterfaceActor()
+AMyInterfaceActorTwo::AMyInterfaceActorTwo()
 {
 	MyTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("My Timeline"));
 
-	Name = FString(TEXT("Harry"));
+	Name = FString(TEXT("Eddy"));
 }
 
-void AMyInterfaceActor::MoveToLocation(float value) 
+void AMyInterfaceActorTwo::MoveToLocation(float value) 
 {
 	SetActorLocation(FMath::Lerp(Start, End, value));
 }
 
-void AMyInterfaceActor::ReactToTriggerBegin()
+void AMyInterfaceActorTwo::ReactToTriggerBegin()
 {
 	IMyInterface::ReactToTriggerBegin();
 
@@ -31,12 +31,12 @@ void AMyInterfaceActor::ReactToTriggerBegin()
 		MyTimeline->AddInterpFloat(MyCurve, TimelineCallback);
 		MyTimeline->SetLooping(false);
 		Start = GetActorLocation();
-		End = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
+		End = Start*5;
 		MyTimeline->PlayFromStart();
 	}
 }
 
-void AMyInterfaceActor::ReactToTriggerEnd()
+void AMyInterfaceActorTwo::ReactToTriggerEnd()
 {
 	IMyInterface::ReactToTriggerEnd();
 

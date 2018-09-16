@@ -32,5 +32,8 @@ public:
 
 	virtual void SaySomething();
 
+	virtual void ReactToTriggerBegin();
+	virtual void ReactToTriggerEnd();
+
 	FString Name;
 };

@@ -9,18 +9,18 @@
 #include "CoreMinimal.h"
 #include "MyInterface.h"
 #include "GameFramework/Actor.h"
-#include "MyInterfaceActor.generated.h"
+#include "MyInterfaceActorTwo.generated.h"
 
 class UTimelineComponent;
 
 UCLASS()
-class UNREALCPP_API AMyInterfaceActor : public AActor, public IMyInterface
+class UNREALCPP_API AMyInterfaceActorTwo : public AActor, public IMyInterface
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AMyInterfaceActor();
+	AMyInterfaceActorTwo();
 
 	// virtual void SaySomething() override;
 	virtual void ReactToTriggerBegin() override;
