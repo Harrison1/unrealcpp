@@ -21,12 +21,11 @@
 #include "Components/BoxComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 
+// Updated Code: This works with a timeline that goes from 0-1 in two seconds
+
 // Sets default values
 AOpenDoorTimelineOverlap::AOpenDoorTimelineOverlap()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
 	Open = false;
 
     MyBoxComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("My Box Component"));
@@ -47,7 +46,7 @@ void AOpenDoorTimelineOverlap::BeginPlay()
 {
 	Super::BeginPlay();
 
-    RotateValue = 1.0f;
+    RotateValue = 90.0f;
 
     if (OpenCurve)
     {
@@ -60,20 +59,9 @@ void AOpenDoorTimelineOverlap::BeginPlay()
     }
 }
 
-// Called every frame
-void AOpenDoorTimelineOverlap::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-   	if (MyTimeline != NULL)
-	{
-		MyTimeline->TickComponent(DeltaTime, ELevelTick::LEVELTICK_TimeOnly, NULL);
-	}
-}
-
 void AOpenDoorTimelineOverlap::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-    if ( (OtherActor != nullptr ) && (OtherActor != this) && ( OtherComp != nullptr ) ) 
+    if ( (OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) ) 
     {
 
         FVector PawnLocation = OtherActor->GetActorLocation();
@@ -82,15 +70,14 @@ void AOpenDoorTimelineOverlap::OnOverlapBegin(class UPrimitiveComponent* Overlap
 
         if(Direction.X > 0.0f)
         {
-            RotateValue = 1.0f;
+            RotateValue = 90.0f;
         }
         else
         {
-            RotateValue = -1.0f;
+            RotateValue = -90.0f;
         }
 
         DoorRotation = Door->RelativeRotation;
-		UE_LOG(LogTemp, Warning, TEXT("I just started running"));
 		Open = true;
 		if (MyTimeline != NULL)
 		{
@@ -101,7 +88,7 @@ void AOpenDoorTimelineOverlap::OnOverlapBegin(class UPrimitiveComponent* Overlap
 
 void AOpenDoorTimelineOverlap::OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-    if ( (OtherActor != nullptr ) && (OtherActor != this) && ( OtherComp != nullptr ) )  
+    if ( (OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) )  
     {
         DoorRotation = Door->RelativeRotation;
 
@@ -117,8 +104,7 @@ void AOpenDoorTimelineOverlap::ControlDoor(float Value)
 {
     if(Open) 
     {
-        TimelineValue = MyTimeline->GetPlaybackPosition();
-        CurveFloatValue = RotateValue*OpenCurve->GetFloatValue(TimelineValue);
+        CurveFloatValue = RotateValue*Value;
 
         FQuat NewRotation = FQuat(FRotator(0.f, CurveFloatValue, 0.f));
 
@@ -131,8 +117,7 @@ void AOpenDoorTimelineOverlap::ControlDoor(float Value)
     }
     else 
     {
-        TimelineValue = MyTimeline->GetPlaybackPosition();
-        CurveFloatValue = RotateValue*OpenCurve->GetFloatValue(TimelineValue);
+        CurveFloatValue = RotateValue*Value;
 
         FQuat NewRotation = FQuat(FRotator(0.f, CurveFloatValue, 0.f));
 

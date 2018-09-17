@@ -27,9 +27,6 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* Door;
 
@@ -53,7 +50,6 @@ public:
 	bool Open;
 	float RotateValue;
 	float CurveFloatValue;
-	float TimelineValue;
 	FRotator DoorRotation;
 	UTimelineComponent* MyTimeline;
 };
