@@ -6,12 +6,17 @@
 
 #include "InventoryItem.h"
 
-
 // Sets default values
 AInventoryItem::AInventoryItem()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+
+  InventoryItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("InventoryItem Mesh"));
+  InventoryItemMesh->SetSimulatePhysics(true);
+  RootComponent = InventoryItemMesh;
+
+  InventoryItemTexture = CreateDefaultSubobject<UTexture2D>(TEXT("InventoryItem Texture"));
+
+  isGlowing = false;
 
 }
 
@@ -19,13 +24,38 @@ AInventoryItem::AInventoryItem()
 void AInventoryItem::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+  InitialMaterial = InventoryItemMesh->GetMaterial(0);
+
+  DynamicMatInstance = InventoryItemMesh->CreateAndSetMaterialInstanceDynamic(0);
+
+  if(InventoryItemMesh->GetStaticMesh() && DynamicMatInstance) 
+  {
+    UE_LOG(LogTemp, Warning, TEXT("I have a mesh and material"));
+  } 
+  else
+  {
+    UE_LOG(LogTemp, Warning, TEXT("I am missing either the mesh or material"));
+  }
 }
 
-// Called every frame
-void AInventoryItem::Tick(float DeltaTime)
+void AInventoryItem::BeginFocus()
 {
-	Super::Tick(DeltaTime);
-
+  if(InventoryItemMesh->GetStaticMesh() && DynamicMatInstance) 
+  {
+    DynamicMatInstance->SetScalarParameterValue(FName("EmissiveParam"), 50.0f);
+  }
 }
 
+void AInventoryItem::EndFocus()
+{
+  if(InventoryItemMesh->GetStaticMesh() && DynamicMatInstance) 
+  {
+    DynamicMatInstance->SetScalarParameterValue(FName("EmissiveParam"), 0.0f);
+  }
+}
+
+FString AInventoryItem::MyName()
+{
+  return InventoryItemName;
+}

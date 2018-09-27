@@ -4,8 +4,6 @@
 // https://severallevels.io
 // https://harrisonmcguire.com
 
-#pragma once
-
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "InventoryItem.generated.h"
@@ -24,9 +22,38 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
-	
+  UPROPERTY(EditAnywhere, Category = InventoryItem)
+  class UStaticMeshComponent* InventoryItemMesh;
+
+  UPROPERTY(EditAnywhere, Category = InventoryItem)
+  class UTexture2D* InventoryItemTexture;
+
+  UPROPERTY(EditAnywhere, Category = InventoryItem)
+  FString InventoryItemName;
+
+  UPROPERTY(EditAnywhere, Category = InventoryItem)
+  class UMaterialInterface* InitialMaterial;
+
+  UPROPERTY(EditAnywhere, Category = InventoryItem)
+  class UMaterialInterface* GlowMaterial;
+
+  UPROPERTY(EditAnywhere, Category = InventoryItem)
+  class UMaterialInstanceDynamic* DynamicMatInstance;
+
+  UPROPERTY(EditAnywhere, Category = InventoryItem)
+  bool isGlowing;
+
+  UFUNCTION()
+  void BeginFocus();
+
+  UFUNCTION()
+  void EndFocus();
+
+  UFUNCTION()
+  FString MyName();
+
+  FORCEINLINE UTexture2D* GetInventoryItemTexture() { return InventoryItemTexture; }
 	
 };
+
