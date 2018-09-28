@@ -1,4 +1,8 @@
-// Harrison McGuire// UE4 Version 4.20.3// https://github.com/Harrison1/unrealcpp// https://severallevels.io// https://harrisonmcguire.com
+// Harrison McGuire
+// UE4 Version 4.20.3
+// https://github.com/Harrison1/unrealcpp
+// https://severallevels.io
+// https://harrisonmcguire.com
 
 #include "ShooterProjectile.h"
 
