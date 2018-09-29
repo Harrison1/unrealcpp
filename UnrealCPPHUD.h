@@ -2,7 +2,6 @@
 
 #pragma once 
 
-#include "CoreMinimal.h"
 #include "GameFramework/HUD.h"
 #include "UnrealCPPHUD.generated.h"
 

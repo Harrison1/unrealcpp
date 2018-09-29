@@ -6,7 +6,6 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
 #include "Engine/TriggerVolume.h"
 #include "MyTriggerVolume.generated.h"
 

@@ -6,7 +6,6 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
 #include "Camera/CameraShake.h"
 #include "MyCameraShake.generated.h"
 

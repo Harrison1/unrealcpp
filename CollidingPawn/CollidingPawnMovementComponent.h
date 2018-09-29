@@ -6,7 +6,6 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
 #include "GameFramework/PawnMovementComponent.h"
 #include "CollidingPawnMovementComponent.generated.h"
 

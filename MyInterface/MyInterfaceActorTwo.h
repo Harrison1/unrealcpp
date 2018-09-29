@@ -6,7 +6,6 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
 #include "MyInterface.h"
 #include "GameFramework/Actor.h"
 #include "MyInterfaceActorTwo.generated.h"

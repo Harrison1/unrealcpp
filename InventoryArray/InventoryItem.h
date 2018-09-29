@@ -4,7 +4,8 @@
 // https://severallevels.io
 // https://harrisonmcguire.com
 
-#include "CoreMinimal.h"
+#pragma once
+
 #include "GameFramework/Actor.h"
 #include "InventoryItem.generated.h"
 
