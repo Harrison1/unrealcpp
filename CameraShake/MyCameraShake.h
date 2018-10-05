@@ -9,9 +9,6 @@
 #include "Camera/CameraShake.h"
 #include "MyCameraShake.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class UNREALCPP_API UMyCameraShake : public UCameraShake
 {
