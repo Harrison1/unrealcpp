@@ -9,9 +9,6 @@
 #include "Engine/TriggerVolume.h"
 #include "TriggerVolumeSpecificActor.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class UNREALCPP_API ATriggerVolumeSpecificActor : public ATriggerVolume
 {
