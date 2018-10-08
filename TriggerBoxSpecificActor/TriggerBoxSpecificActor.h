@@ -9,9 +9,7 @@
 #include "Engine/TriggerBox.h"
 #include "TriggerBoxSpecificActor.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class UNREALCPP_API ATriggerBoxSpecificActor : public ATriggerBox
 {
