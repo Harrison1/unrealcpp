@@ -29,8 +29,7 @@ void ARotatingActor::Tick(float DeltaTime)
 	AddActorLocalRotation(QuatRotation, false, 0, ETeleportType::None);
 
 	// You will want to set rotation with Quanternions and not Rotation values
-	// The below method causes a bug for the pitch value. The pitch value stops updating at 90 degrees
-	// you can check out the link here by ue4 user nutellis https://answers.unrealengine.com/questions/591752/pitch-rotation-stucks-at-90-90-c.html
+	// The below method causes a bug for the pitch value. The pitch value stops updating at 90 degrees due to Gimbal Lock
 
 	// FRotator NewRotation = GetActorRotation();
 
