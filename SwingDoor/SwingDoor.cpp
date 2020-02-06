@@ -3,6 +3,14 @@
 // https://github.com/Harrison1
 // https://unrealcpp.com
 
+// helpful links
+// https://docs.unrealengine.com/latest/INT/API/Runtime/Engine/GameFramework/AActor/SetActorRelativeRotation/2/index.html
+// https://docs.unrealengine.com/latest/INT/API/Runtime/Engine/Components/USceneComponent/GetComponentRotation/index.html
+// https://docs.unrealengine.com/latest/INT/API/Runtime/Engine/Kismet/UKismetSystemLibrary/DrawDebugBox/
+// https://docs.unrealengine.com/latest/INT/API/Runtime/Engine/DrawDebugBox/2/
+// https://docs.unrealengine.com/latest/INT/API/Runtime/Core/Math/FVector/DotProduct/index.html
+// https://docs.unrealengine.com/latest/INT/API/Runtime/Core/Math/FMath/
+// https://docs.unrealengine.com/latest/INT/BlueprintAPI/Math/Float/Sign_float/
 
 #include "SwingDoor.h"
 #include "UObject/ConstructorHelpers.h"
