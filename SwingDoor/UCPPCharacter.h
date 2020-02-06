@@ -1,16 +1,15 @@
-// Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
+// Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "UnrealCPPCharacter.generated.h"
+#include "UCPPCharacter.generated.h"
 
 class UInputComponent;
-class ASwingDoor;
 
 UCLASS(config=Game)
-class AUnrealCPPCharacter : public ACharacter
+class AUCPPCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -45,13 +44,14 @@ class AUnrealCPPCharacter : public ACharacter
 	/** Motion controller (left hand) */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UMotionControllerComponent* L_MotionController;
-
-	// create trigger capsule
+	
+	 // create trigger capsule
 	UPROPERTY(VisibleAnywhere, Category = "Trigger Capsule")
 	class UCapsuleComponent* TriggerCapsule;
 
+
 public:
-	AUnrealCPPCharacter();
+	AUCPPCharacter();
 
 protected:
 	virtual void BeginPlay();
@@ -71,7 +71,7 @@ public:
 
 	/** Projectile class to spawn */
 	UPROPERTY(EditDefaultsOnly, Category=Projectile)
-	TSubclassOf<class AUnrealCPPProjectile> ProjectileClass;
+	TSubclassOf<class AUCPPProjectile> ProjectileClass;
 
 	/** Sound to play each time we fire */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
@@ -93,6 +93,7 @@ public:
 	UFUNCTION()
 	void OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
+	UPROPERTY()
 	class ASwingDoor* CurrentDoor;
 
 protected:
@@ -100,7 +101,7 @@ protected:
 	/** Fires a projectile. */
 	void OnFire();
 
-	// on action 
+	/** on Action */
 	void OnAction();
 
 	/** Resets HMD orientation and position in VR. */

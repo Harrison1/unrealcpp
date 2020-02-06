@@ -1,18 +1,16 @@
 // Harrison McGuire
-// UE4 Version 4.20.2
-// https://github.com/Harrison1/unrealcpp
-// https://severallevels.io
-// https://harrisonmcguire.com
+// UE4 Version 4.24.2
+// https://github.com/Harrison1
+// https://unrealcpp.com
 
 #pragma once
 
+#include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "SwingDoor.generated.h"
 
-class UBoxComponent;
-
 UCLASS()
-class UNREALCPP_API ASwingDoor : public AActor
+class UCPP_API ASwingDoor : public AActor
 {
 	GENERATED_BODY()
 	
@@ -28,29 +26,29 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION()
-	void OpenDoor(float dt);
-
-	UFUNCTION()
-	void CloseDoor(float dt);
-
+	UPROPERTY()
 	class UStaticMeshComponent* Door;
 
 	// declare sphere comp
 	UPROPERTY(VisibleAnywhere, Category = "BoxComp")
 	class UBoxComponent* BoxComp;
 
+	bool Opening = false;
+	bool Closing = false;
+	bool isClosed = true;
+
+	float DotP = 0.f;
+	float MaxDegree = 0.f;
+	float AddRotation = 0.f;
+	float PosNeg = 0.f;
+	float DoorCurrentRotation = 0.f;
+
+	UFUNCTION()
+	void OpenDoor(float dt);
+
+	UFUNCTION()
+	void CloseDoor(float dt);
+
 	UFUNCTION()
 	void ToggleDoor(FVector ForwardVector);
-
-	bool Opening;
-	bool Closing;
-	bool isClosed;
-
-	float DotP;
-	float MaxDegree;
-	float AddRotation;
-	float PosNeg;
-	float DoorCurrentRotation;
-	
 };
