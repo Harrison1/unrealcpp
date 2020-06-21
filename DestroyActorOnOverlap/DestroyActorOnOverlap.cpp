@@ -1,20 +1,21 @@
-// Harrison McGuire
-// UE4 Version 4.20.2
-// https://github.com/Harrison1/unrealcpp
-// https://severallevels.io
-// https://harrisonmcguire.com
+// Unreal Version 4.25.1 
+
 
 #include "DestroyActorOnOverlap.h"
-
+#include "Components/SphereComponent.h"
 
 // Sets default values
-// add a mesh in the editor and set Collision Presets to Trigger
 ADestroyActorOnOverlap::ADestroyActorOnOverlap()
 {
-	OnActorBeginOverlap.AddDynamic(this, &ADestroyActorOnOverlap::OnOverlap);
+	MySphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("My Sphere Component"));
+	MySphereComponent->InitSphereRadius(100.f);
+	MySphereComponent->SetCollisionProfileName(TEXT("Trigger"));
+	RootComponent = MySphereComponent;
+
+	MySphereComponent->OnComponentBeginOverlap.AddDynamic(this, &ADestroyActorOnOverlap::OnOverlapBegin);
 }
 
-void ADestroyActorOnOverlap::OnOverlap(AActor* MyOverlappedActor, AActor* OtherActor)
+void ADestroyActorOnOverlap::OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	Destroy();
 }
