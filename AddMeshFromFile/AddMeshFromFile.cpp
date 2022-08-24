@@ -6,7 +6,7 @@
 
 #include "AddMeshFromFile.h"
 // add constructor header
-#include "ConstructorHelpers.h"
+#include "UObject/ConstructorHelpers.h"
 
 // Sets default values
 AAddMeshFromFile::AAddMeshFromFile()
