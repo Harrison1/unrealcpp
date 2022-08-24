@@ -41,8 +41,8 @@ AOpenDoorWithLerp::AOpenDoorWithLerp()
 void AOpenDoorWithLerp::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	DoorRotation = Door->RelativeRotation;
+	// maybe in UE5,RelativeRotation is private
+	DoorRotation = Door->GetRelativeRotation();
 
     if(Open)
     {
