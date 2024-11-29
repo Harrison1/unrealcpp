@@ -1,4 +1,6 @@
-## [unrealcpp.com](https://unrealcpp.com/)
+# [unrealcpp.com](https://unrealcpp.com/)
+
+## Visit the [GD Tactics Unreal repo](https://github.com/Harrison1/gdtactics-unreal) for the latest
 
 This repo holds all the code for the [unrealcpp.com](https://unrealcpp.com/) tutorials.
 
